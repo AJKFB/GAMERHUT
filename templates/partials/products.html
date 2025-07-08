@@ -1,315 +1,0 @@
-
-<!-- GOW -->
-<div class="product">
-  <img src="images/1.jpg" alt="GOW">
-  <h3>GOW</h3>
-
-  {% if offers.get("GOW") %}
-    {% set offer = offers.get("GOW") %}
-    <div class="offer-banner" style="color: red; font-weight: bold;">
-      🎯 عرض خاص من {{ offer.start_date }} إلى {{ offer.end_date }}
-    </div>
-    <p>
-      <del>21$</del>
-      <span style="color: green;">
-        {{ (21 - (21 * offer.discount / 100)) | round(2) }}$
-      </span>
-    </p>
-  {% else %}
-    <p>ملك الحرب مفتاح ب 21 دولار</p>
-    <p class="usd-price" data-usd="21">مفتاح لعبة ملك الحرب بسعر 21 دولار</p>
-  {% endif %}
-
-  <button class="btn" onclick="addToCart('GOW', 21)">أضف إلى السلة</button>
-  <button class="btn" onclick="buyNow('GOW')">اشتري الآن</button>
-</div>
-
-<!-- MC -->
-<div class="product">
-  <img src="images/2.jpg" alt="MC">
-  <h3>MC</h3>
-
-  {% if offers.get("MC") %}
-    {% set offer = offers.get("MC") %}
-    <div class="offer-banner" style="color: red; font-weight: bold;">
-      🎯 عرض خاص من {{ offer.start_date }} إلى {{ offer.end_date }}
-    </div>
-    <p>
-      <del>10$</del>
-      <span style="color: green;">
-        {{ (10 - (10 * offer.discount / 100)) | round(2) }}$
-      </span>
-    </p>
-  {% else %}
-    <p>ماين كرافت حساب كامل الوصول ب 10 دولار</p>
-    <p class="usd-price" data-usd="10">حساب ماين كرافت كامل الوصول بسعر 10 دولار</p>
-  {% endif %}
-
-  <button class="btn" onclick="addToCart('MC', 10)">أضف إلى السلة</button>
-  <button class="btn" onclick="buyNow('MC')">اشتري الآن</button>
-</div>
-
-<div class="product">
-  <img src="images/55.jpg" alt="MK11">
-  <h3>MK11</h3>
-
-  {% if offers.get("MK11") %}
-    {% set offer = offers.get("MK11") %}
-    <div class="offer-banner" style="color: red; font-weight: bold;">
-      🎯 عرض خاص من {{ offer.start_date }} إلى {{ offer.end_date }}
-    </div>
-    <p>
-      <del>10$</del>
-      <span style="color: green;">
-        {{ (10 - (10 * offer.discount / 100)) | round(2) }}$
-      </span>
-    </p>
-  {% else %}
-    <p>مورتال كومبات ب 10 دولار</p>
-    <p class="usd-price" data-usd="10">مفتاح لعبة مورتال كومبات 11 10 دولار</p>
-  {% endif %}
-
-  <button class="btn" onclick="addToCart('MK11', 10)">أضف إلى السلة</button>
-  <button class="btn" onclick="buyNow('MK11')">اشتري الآن</button>
-</div>
-
-
-<div class="product">
-  <a href="/product/red2"><img src="images/red.jpg" alt="RED2"></a>
-  <h3>RED2</h3>
-
-  {% if offers.get("RED2") %}
-    {% set offer = offers.get("RED2") %}
-    <div class="offer-banner" style="color: red; font-weight: bold;">
-      🎯 عرض خاص من {{ offer.start_date }} إلى {{ offer.end_date }}
-    </div>
-    <p>
-      <del>16$</del>
-      <span style="color: green;">
-        {{ (16 - (16 * offer.discount / 100)) | round(2) }}$
-      </span>
-    </p>
-  {% else %}
-    <p>ريد ديد ريدبشن ب 16 دولار</p>
-    <p class="usd-price" data-usd="16">مفتاح لعبة ريد ديد ريدمبشن 2 بسعر 16 دولار</p>
-  {% endif %}
-
-  <button class="btn" onclick="addToCart('RED2', 16)">أضف إلى السلة</button>
-  <button class="btn" onclick="buyNow('RED2')">اشتري الآن</button>
-</div>
-
-
-<div class="product">
-  <img src="images/sk.jpg" alt="SEKIRO">
-  <h3>SEKIRO</h3>
-
-  {% if offers.get("SEKIRO") %}
-    {% set offer = offers.get("SEKIRO") %}
-    <div class="offer-banner" style="color: red; font-weight: bold;">
-      🎯 عرض خاص من {{ offer.start_date }} إلى {{ offer.end_date }}
-    </div>
-    <p>
-      <del>8$</del>
-      <span style="color: green;">
-        {{ (8 - (8 * offer.discount / 100)) | round(2) }}$
-      </span>
-    </p>
-  {% else %}
-    <p>حساب كامل الوصول لعبة سيكيرو بسعر 8 دولار</p>
-    <p class="usd-price" data-usd="8">مفتاح لعبة سيكيرو بسعر 8 دولار</p>
-  {% endif %}
-
-  <button class="btn" onclick="addToCart('SKEIRO', 8)">أضف إلى السلة</button>
-  <button class="btn" onclick="buyNow('SKEIRO')">اشتري الآن</button>
-</div>
-
-
-<div class="product">
-  <img src="images/B.jpg" alt="BATMAN">
-  <h3>BATMAN</h3>
-
-  {% if offers.get("BATMAN") %}
-    {% set offer = offers.get("BATMAN") %}
-    <div class="offer-banner" style="color: red; font-weight: bold;">
-      🎯 عرض خاص من {{ offer.start_date }} إلى {{ offer.end_date }}
-    </div>
-    <p>
-      <del>6.20$</del>
-      <span style="color: green;">
-        {{ (6.20 - (6.20 * offer.discount / 100)) | round(2) }}$
-      </span>
-    </p>
-  {% else %}
-    <p>بتمان مفتاح بسعر 6.20 دولار</p>
-    <p class="usd-price" data-usd="6.20">مفتاح لعبة بتمان بسعر 6.20 دولار</p>
-  {% endif %}
-
-  <button class="btn" onclick="addToCart('BATMAN', 6.20)">أضف إلى السلة</button>
-  <button class="btn" onclick="buyNow('BATMAN')">اشتري الآن</button>
-</div>
-
-
-<div class="product">
-  <a href="/product/gta5"><img src="images/G.jpg" alt="GTA5"></a>
-  <h3>GTA5</h3>
-
-  {% if offers.get("GTA5") %}
-    {% set offer = offers.get("GTA5") %}
-    <div class="offer-banner" style="color: red; font-weight: bold;">
-      🎯 عرض خاص من {{ offer.start_date }} إلى {{ offer.end_date }}
-    </div>
-    <p>
-      <del>12.60$</del>
-      <span style="color: green;">
-        {{ (12.60 - (12.60 * offer.discount / 100)) | round(2) }}$
-      </span>
-    </p>
-  {% else %}
-    <p>لمنصة ROCKSTAR GAMES GTA5 مفتاح بسعر 12.60 دولار</p>
-    <p class="usd-price" data-usd="12.60">مفتاح لعبة GTA5 بسعر 12.60 دولار</p>
-  {% endif %}
-
-  <button class="btn" onclick="addToCart('GTA5', 12.60)">أضف إلى السلة</button>
-  <button class="btn" onclick="buyNow('GTA5')">اشتري الآن</button>
-</div>
-
-
-<div class="product">
-  <img src="images/D.jpg" alt="DL1">
-  <h3>DL1</h3>
-
-  {% if offers.get("DL1") %}
-    {% set offer = offers.get("DL1") %}
-    <div class="offer-banner" style="color: red; font-weight: bold;">
-      🎯 عرض خاص من {{ offer.start_date }} إلى {{ offer.end_date }}
-    </div>
-    <p>
-      <del>13$</del>
-      <span style="color: green;">
-        {{ (13 - (13 * offer.discount / 100)) | round(2) }}$
-      </span>
-    </p>
-  {% else %}
-    <p>DYING LIGHT مفتاح بسعر 13 دولار</p>
-    <p class="usd-price" data-usd="13">مفتاح لعبة DYING LIGHT بسعر 13 دولار</p>
-  {% endif %}
-
-  <button class="btn" onclick="addToCart('DL1', 13)">أضف إلى السلة</button>
-  <button class="btn" onclick="buyNow('DL1')">اشتري الآن</button>
-</div>
-
-
-
-
-<div class="product">
-  <img src="images/inj.jpg" alt="INJ2">
-  <h3>INJ2</h3>
-
-  {% if offers.get("INJ2") %}
-    {% set offer = offers.get("INJ2") %}
-    <div class="offer-banner" style="color: red; font-weight: bold;">
-      🎯 عرض خاص من {{ offer.start_date }} إلى {{ offer.end_date }}
-    </div>
-    <p>
-      <del>6.5$</del>
-      <span style="color: green;">
-        {{ (6.5 - (6.5 * offer.discount / 100)) | round(2) }}$
-      </span>
-    </p>
-  {% else %}
-    <p>INJUSTICE 2 مفتاح بسعر 6.5 دولار</p>
-    <p class="usd-price" data-usd="6.5">مفتاح لعبة INJUSTICE 2 بسعر 6.5 دولار</p>
-  {% endif %}
-
-  <button class="btn" onclick="addToCart('INJ2', 6.5)">أضف إلى السلة</button>
-  <button class="btn" onclick="buyNow('INJ2')">اشتري الآن</button>
-</div>
-
-
-
-
-
-<div class="product">
-  <img src="images/F.jpg" alt="FC5">
-  <h3>FC5</h3>
-
-  {% if offers.get("FC5") %}
-    {% set offer = offers.get("FC5") %}
-    <div class="offer-banner" style="color: red; font-weight: bold;">
-      🎯 عرض خاص من {{ offer.start_date }} إلى {{ offer.end_date }}
-    </div>
-    <p>
-      <del>10.0$</del>
-      <span style="color: green;">
-        {{ (10.0 - (10.0 * offer.discount / 100)) | round(2) }}$
-      </span>
-    </p>
-  {% else %}
-    <p>لعبة far cry بسعر 10 دولار</p>
-    <p class="usd-price" data-usd="10.0">لعبة far cry بسعر 10.0 دولار</p>
-  {% endif %}
-
-  <button class="btn" onclick="addToCart('FC5', 10.0)">أضف إلى السلة</button>
-  <button class="btn" onclick="buyNow('FC5')">اشتري الآن</button>
-</div>
-
-
-
-<div class="product">
-  <img src="images/R.jpg" alt="RER4">
-  <h3>RER4</h3>
-
-  {% if offers.get("RER4") %}
-    {% set offer = offers.get("RER4") %}
-    <div class="offer-banner" style="color: red; font-weight: bold;">
-      🎯 عرض خاص من {{ offer.start_date }} إلى {{ offer.end_date }}
-    </div>
-    <p>
-      <del>19$</del>
-      <span style="color: green;">
-        {{ (19 - (19 * offer.discount / 100)) | round(2) }}$
-      </span>
-    </p>
-  {% else %}
-    <p>RESDINT EVIL REMAKE 4 مفتاح بسعر 20 دولار</p>
-    <p class="usd-price" data-usd="19">مفتاح لعبة RESDINT EVIL REMAKE 4 بسعر 19 دولار</p>
-  {% endif %}
-
-  <button class="btn" onclick="addToCart('RER4', 19)">أضف إلى السلة</button>
-  <button class="btn" onclick="buyNow('RER4')">اشتري الآن</button>
-</div>
-
-
-{% for product in products %}
-<div class="product">
-  {% if product.link %}
-    <a href="{{ product.link }}">
-      <img src="{{ product.img }}" alt="{{ product.name }}">
-    </a>
-  {% else %}
-    <img src="{{ product.img }}" alt="{{ product.name }}">
-  {% endif %}
-  
-  <h3>{{ product.name }}</h3>
-
-  {% set offer = offers.get(product.name) %}
-  {% if offer %}
-    <div class="offer-banner" style="color: red; font-weight: bold;">
-      🎯 عرض خاص من {{ offer.start_date }} إلى {{ offer.end_date }}
-    </div>
-    <p>
-      <del>{{ product.price }}$</del>
-      <span style="color: green;">
-        {{ (product.price - (product.price * offer.discount / 100)) | round(2) }}$
-      </span>
-    </p>
-  {% else %}
-    <p>{{ product.desc1 }}</p>
-    <p class="usd-price" data-usd="{{ product.price }}">{{ product.desc2 }}</p>
-  {% endif %}
-
-  <button class="btn" onclick="addToCart('{{ product.name }}', {{ product.price }})">أضف إلى السلة</button>
-  <button class="btn" onclick="buyNow('{{ product.name }}')">اشتري الآن</button>
-</div>
-{% endfor %}
-
