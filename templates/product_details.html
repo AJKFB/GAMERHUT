@@ -1,0 +1,59 @@
+<!-- 📄 templates/product_details.html -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ product.name }}</title>
+  <style>
+    body {
+      font-family: Tahoma;
+      background: #f9f9f9;
+      color: #222;
+      padding: 20px;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+    .btn {
+      margin: 10px 5px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #4fc3f7;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+    <pre>
+{{ product | tojson(indent=2) }}
+</pre>
+
+  <div class="container">
+    <h1>{{ product.name }}</h1>
+    <img src="/{{ product.image }}" alt="{{ product.name }}">
+    <p style="margin-top: 20px;">{{ product.short }}</p>
+    <div style="margin-top: 10px;">{{ product.description | safe }}</div>
+    <h3 style="margin-top: 20px;">💰 السعر: {{ product.price }} دولار</h3>
+    <button class="btn" onclick="addToCart('{{ product.name }}', {{ product.price }})">🛒 أضف إلى السلة</button>
+    <button class="btn" onclick="buyNow('{{ product.name }}')">⚡ اشتري الآن</button>
+  </div>
+  <script>
+    function addToCart(name, price) {
+      alert("🛒 تمت إضافة " + name + " إلى السلة بسعر " + price + "$");
+    }
+    function buyNow(name) {
+      alert("⚡ طلب فوري لـ " + name);
+    }
+  </script>
+</body>
+</html>

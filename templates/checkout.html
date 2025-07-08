@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta charset="UTF-8">
+    <title>صفحة الدفع</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: right;
+            margin: 20px;
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            color: #343a40;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h3 {
+            color: #007bff;
+            text-align: center;
+        }
+
+        .cart-item {
+            border-bottom: 1px solid #dee2e6;
+            padding: 10px 0;
+        }
+
+        select, input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .email-input {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🛒 صفحة الدفع</h1>
+
+    <!-- عرض محتويات السلة -->
+    <div id="cart-items"></div>
+
+    <!-- اختيار طريقة الدفع -->
+    <h3>اختر طريقة الدفع:</h3>
+    <select id="paymentMethod" onchange="showPaymentDetails()">
+        <option value="mob">بريد موب</option>
+        <option value="paypal">PayPal</option>
+    </select>
+
+    <div id="mobDetails" class="hidden">
+        <h3>تفاصيل الدفع عبر بريد موب:</h3>
+        <p>الرجاء إرسال المبلغ إلى الرقم التالي:</p>
+        <strong>00799999004340388008</strong>
+        <p>بعد الدفع، أرسل صورة الإيصال إلى البريد التالي:</p>
+        <a href="mailto:gamesbeststore9@gmail.com">gamesbeststore9@gmail.com</a>
+    </div>
+
+    <div id="paypalDetails" class="hidden">
+        <h3>الدفع عبر PayPal:</h3>
+        <p>اضغط على الزر لإتمام الدفع عبر PayPal:</p>
+        <div id="paypal-button-container"></div>
+       
+    </div>
+
+   <div class="email-input">
+    <label for="email">📧 بريدك الإلكتروني:</label>
+    <input type="email" name="email" id="email" placeholder="بريدك الإلكتروني" value="{{ email }}" readonly>
+
+</div>
+
+
+    <button onclick="completePurchase()">إتمام الشراء</button>
+</div>
+
+
+
+<!-- 1. تضمين SDK -->
+<script src="https://www.paypal.com/sdk/js?client-id=Acc8auHvO8kgC6d7rBn30-FIIlyHJ8YRXXcNM_-LUghvLQ7-EjnxGoH-GlHuVerIsAurxnd6kAUnUjRT&currency=USD"></script>
+<!-- 2. مكان ظهور الزر -->
+
+
+<!-- 3. سكربت تنفيذ الدفع -->
+<script>
+  async function getCartTotalWithDiscount() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const coupon = JSON.parse(localStorage.getItem("coupon")) || null;
+
+    const response = await fetch("/products.json");
+    const allProducts = await response.json();
+
+    let total = 0;
+    for (const code of cart) {
+      const product = allProducts[code];
+      if (product) total += product.price;
+    }
+
+    if (coupon) {
+      if (coupon.type === "percent") {
+        total -= total * (coupon.value / 100);
+      } else if (coupon.type === "fixed") {
+        total -= coupon.value;
+      }
+    }
+
+    return parseFloat(total.toFixed(2));
+  }
+
+  paypal.Buttons({
+    createOrder: function(data, actions) {
+      return getCartTotalWithDiscount().then(total => {
+        console.log("✅ المبلغ النهائي:", total);
+        return actions.order.create({
+          purchase_units: [{
+            description: "منتجات رقمية",
+            amount: { value: total }
+          }]
+        });
+      });
+    },
+
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        console.log("✅ تفاصيل الدفع:", details);
+
+        return fetch("/paypal-success", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            orderID: data.orderID,
+            payerEmail: details.payer.email_address,
+            fullName: details.payer.name.given_name + " " + details.payer.surname
+          })
+        }).then(res => {
+          if (res.ok) {
+            alert("✅ تم الدفع بنجاح!");
+            window.location.href = "/checkout_success";
+          } else {
+            alert("⚠️ حدث خطأ أثناء إرسال الطلب إلى السيرفر.");
+          }
+        });
+      }).catch(function(error) {
+        console.error("❌ فشل capture:", error);
+        alert("⚠️ فشل تأكيد الدفع. تأكد أنك أكملت عملية الدفع.");
+      });
+    },
+
+    onError: function(err) {
+      console.error("❌ خطأ PayPal:", err);
+      alert("⚠️ حدث خطأ أثناء عملية الدفع.");
+    }
+  }).render('#paypal-button-container');
+</script>
+
+<script>
+  async function displayCart() {
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartItemsDiv = document.getElementById('cart-items');
+
+    if (cartItems.length === 0) {
+      cartItemsDiv.innerHTML = "<p>🛒 السلة فارغة!</p>";
+      return;
+    }
+
+    cartItemsDiv.innerHTML = "";
+
+    cartItems.forEach(code => {
+      const itemDiv = document.createElement("div");
+      itemDiv.className = "cart-item";
+      itemDiv.textContent = code;  // عرض اسم الكود فقط
+      cartItemsDiv.appendChild(itemDiv);
+    });
+  }
+
+  function showPaymentDetails() {
+    const paymentMethod = document.getElementById('paymentMethod').value;
+    document.getElementById('mobDetails').classList.toggle('hidden', paymentMethod !== 'mob');
+    document.getElementById('paypalDetails').classList.toggle('hidden', paymentMethod !== 'paypal');
+  }
+
+      async function completePurchase() {
+    const email = document.getElementById('email').value.trim();
+    if (!email) return alert("❗ يرجى إدخال بريدك الإلكتروني");
+
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    if (cartItems.length === 0) return alert("❗ السلة فارغة");
+
+    const paymentMethod = document.getElementById('paymentMethod').value;
+
+    const res = await fetch("/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email,
+        names: cartItems,
+        payment_method: paymentMethod
+      })
+    });
+
+    const result = await res.json();
+    console.log("✅ الرد من السيرفر:", result);
+
+    if (res.ok) {
+      // 🟡 حفظ بيانات الطلب
+      localStorage.setItem("lastOrder", JSON.stringify({
+        email: result.email,
+        order_id: result.order_id
+      }));
+
+      // عرض رسالة مختصرة مؤقتًا
+      const container = document.querySelector('.container');
+      container.innerHTML = `
+        <h3 style="color: green; text-align: center;">✅ تم إرسال الطلب بنجاح</h3>
+        <p><strong>رقم الطلب:</strong> ${result.order_id}</p>
+        <p><strong>البريد الإلكتروني:</strong> ${result.email}</p>
+        <p><strong>المنتجات:</strong> ${Object.keys(result).filter(k => k !== "email" && k !== "order_id").map(code => result[code].name).join("، ")}</p>
+        <p>جارٍ تحويلك إلى صفحة رفع وصل الدفع...</p>
+      `;
+
+      // بعد 5 ثوانٍ، الانتقال إلى صفحة رفع الوصل
+      setTimeout(() => {
+        window.location.href = "/upload";
+      }, 5000);
+    } else {
+      alert(result.error || "❌ حدث خطأ في الطلب");
+    }
+  }
+
+
+  function getCartTotalWithDiscount() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const coupon = JSON.parse(localStorage.getItem("coupon") || "null");
+  const USD_TO_DZD_RATE = 250;
+  let totalUSD = 0;
+
+  // جمع الأسعار من المنتجات
+  return fetch("/products.json")
+    .then(res => res.json())
+    .then(products => {
+      cart.forEach(code => {
+        const product = products[code];
+        if (product) {
+          totalUSD += product.price;
+        }
+      });
+
+      // تطبيق الخصم
+      if (coupon) {
+        if (coupon.type === "percent") {
+          totalUSD -= totalUSD * (coupon.value / 100);
+        } else if (coupon.type === "fixed") {
+          totalUSD -= coupon.value;
+        }
+      }
+
+      return totalUSD.toFixed(2);
+    });
+}
+
+  </script>
+</body>
+</html>
