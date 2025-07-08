@@ -1,0 +1,215 @@
+{
+
+  "GOW": {
+
+    "name": "ملك الحرب",
+
+    "category": "key",
+
+    "key_type": "restricted",
+
+    "restricted_country":  "CIS excluded RB/RU",
+
+    "price": 20
+
+  },
+
+  "MC": {
+
+    "name": "ماين كرافت ",
+
+    "category": "account",
+
+    "key_type": "global",
+
+    "restricted_country": null,
+
+    "price": 10
+
+  },
+
+
+
+  "MK11": {
+
+    "name": "مورتال كومبات 11",
+
+    "category": "key",
+
+    "key_type": "global",
+
+    "restricted_country": null,
+
+    "price": 10
+
+  },
+
+  "RED2": {
+
+    "name": "ريد ديد ريدمبشن 2",
+
+    "category": "key",
+
+    "key_type": "global ROCKSTAR GAMES ",
+
+    "restricted_country": null,
+
+    "price": 16
+
+  },
+
+"GTA5": {
+
+    "name": "GTA",
+
+    "category": "key",
+
+    "key_type": "global ROCKSTAR GAMES",
+
+    "restricted_country": null,
+
+    "price": 10
+
+  },
+
+"RER4": {
+
+    "name": "RESDINT EIVEL REMAKE 4",
+
+    "category": "key",
+
+    "key_type": "global",
+
+    "restricted_country": null,
+
+    "price": 19
+
+  },
+
+"DL1": {
+
+    "name": "DYING LIGHT",
+
+    "category": "key",
+
+    "key_type": "global",
+
+    "restricted_country": null,
+
+    "price": 13
+
+  },
+
+"BATMAN": {
+
+    "name": "بتمان 3 اجزاء في نسخة واحد",
+
+    "category": "key",
+
+    "key_type": "global",
+
+    "restricted_country": null,
+
+    "price": 6.20
+
+  },
+
+"FC5": {
+
+    "name": "Far Cry 5",
+
+    "category": "account",
+
+    "key_type": "global",
+
+    "restricted_country": null,
+
+    "price": 10
+
+  },
+
+"SKEIRO": {
+
+    "name": "سيكيرو",
+
+    "category": "key",
+
+    "key_type": "global",
+
+    "restricted_country": null,
+
+    "price": 8
+
+  },
+
+"INJ2": {
+
+    "name": "INJUSTICE 2  ",
+
+    "category": "key",
+
+    "key_type": "global",
+
+    "restricted_country": null,
+
+    "price": 6.5
+
+  },
+
+  "12": {
+
+    "name": "ماين كرافت ",
+
+    "category": "account",
+
+    "key_type": "global",
+
+    "restricted_country": null,
+
+    "price": 10
+
+  },
+
+  "13": {
+
+    "name": "ماين كرافت ",
+
+    "category": "account",
+
+    "key_type": "global",
+
+    "restricted_country": null,
+
+    "price": 10
+
+  },
+
+  "14": {
+
+    "name": "ماين كرافت ",
+
+    "category": "account",
+
+    "key_type": "global",
+
+    "restricted_country": null,
+
+    "price": 10
+
+  },
+
+  "15": {
+
+    "name": "ماين كرافت ",
+
+    "category": "account",
+
+    "key_type": "global",
+
+    "restricted_country": null,
+
+    "price": 10
+
+  }
+
+}
